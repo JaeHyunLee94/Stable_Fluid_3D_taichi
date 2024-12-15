@@ -1,4 +1,3 @@
-
 # References:
 # https://github.com/taichi-dev/taichi/blob/master/python/taichi/examples/simulation/stable_fluid.py
 # Joe Stam's legendary paper
@@ -234,11 +233,9 @@ def reset():
     _density_color.fill(0)
 
 
-
 def fillnumpy():
     arr = vol.tonumpy()
     arr[:] = _density_color.to_numpy()
-    print("fill")
     vol.mode(0).c('cool').alpha(0.015)
     vol.imagedata().GetPointData().GetScalars().Modified()
 
@@ -255,10 +252,9 @@ def step_one_frame(evt):
 
 reset()
 vol = Volume(np.zeros_like(_density_color.to_numpy())).mode(0).c('cool').alpha(0.02)  # change properties
-plt = RayCastPlotter(vol, bg='white', bg2='blackboard', screensize =[1920,1920],axes=7)  # Plotter instance
+plt = RayCastPlotter(vol, bg='white', bg2='blackboard', screensize=[1920, 1920], axes=7)  # Plotter instance
 plt.add_callback("timer", step_one_frame)
 
 plt.timer_callback("start")
 plt.show(viewup="z")
 plt.interactive().close()
-
